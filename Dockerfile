@@ -1,11 +1,12 @@
-ARG BASE_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2019
-FROM $BASE_IMAGE
+FROM continuumio/miniconda3
 
 WORKDIR /home/app
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
+
+RUN apt-get update && apt-get install libgl1 -y
 
 COPY . .
 
